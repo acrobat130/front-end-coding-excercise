@@ -18,8 +18,9 @@ window.addEventListener('load', function(event) {
 })
 
 // store and display reports in the browser
-var showAllReports = function(responseText) {
-	console.log("responseText", responseText)
-	reports.push(responseText);
-
+var showAllReports = function(responseTextJSON) {
+	var responsesArray = JSON.parse(responseTextJSON);
+	for (var i = 0; i < responsesArray.length; i++) {
+		reports.push(responsesArray[i]);
+	}
 }
