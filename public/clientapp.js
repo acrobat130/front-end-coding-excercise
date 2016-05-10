@@ -17,6 +17,8 @@ window.addEventListener('load', function(event) {
 	getAllReports('/reports', showAllReports)
 })
 
+////////////////////////////////////////////////////////////
+
 // helper function for sorting the reports
 var sortReportsDescending = function(reportsArray) {
 	reports.sort(function(a, b) {
@@ -30,7 +32,7 @@ var sortReportsDescending = function(reportsArray) {
 var appendReport = function(reportObj) {
 	var parentEl = document.createElement('div');
 	parentEl.innerHTML = reportObj.title;
-	document.body.appendChild(parentEl);
+	document.getElementById('reportList').appendChild(parentEl);
 
 }
 
@@ -55,4 +57,9 @@ var showAllReports = function(responseTextJSON) {
 
 	}
 }
+
+////////////////////////////////////////////////////////////
+
+
+
 
