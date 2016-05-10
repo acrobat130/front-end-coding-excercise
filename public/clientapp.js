@@ -30,9 +30,14 @@ var sortReportsDescending = function(reportsArray) {
 
 // helper function for displaying elements
 var appendReport = function(reportObj) {
-	var parentEl = document.createElement('div');
-	parentEl.innerHTML = reportObj.title;
-	document.getElementById('reportList').appendChild(parentEl);
+	var el = document.createElement('div');
+	el.innerHTML = reportObj.title;
+	el.onclick = function() {
+		document.getElementById('reportTitle').innerHTML = reportObj.title;
+		document.getElementById('reportDetails').innerHTML = reportObj.body;
+
+	}
+	document.getElementById('reportList').appendChild(el);
 
 }
 
