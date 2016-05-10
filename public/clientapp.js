@@ -17,6 +17,15 @@ window.addEventListener('load', function(event) {
 	getAllReports('/reports', showAllReports)
 })
 
+// helper function for sorting the reports
+var sortReportsDescending = function(reportsArray) {
+	reports.sort(function(a, b) {
+		if (Date.parse(b.created) > Date.parse(a.created)) {
+			return 1;
+		}
+	});
+}
+
 // helper function for displaying elements
 var appendReport = function(reportObj) {
 	var parentEl = document.createElement('div');
@@ -25,17 +34,25 @@ var appendReport = function(reportObj) {
 
 }
 
-// store and display reports in the browser
+// store, sort, and display reports in the browser
 var showAllReports = function(responseTextJSON) {
 	var responsesArray = JSON.parse(responseTextJSON);
 	// store reports in global array
 	for (var i = 0; i < responsesArray.length; i++) {
 		reports.push(responsesArray[i]);
 	}
+
+	// sort reports in global array
+	sortReportsDescending(reports);
+
 	// display reports from global array
 	for (var i = 0; i < reports.length; i++) {
 		appendReport(reports[i]);
 	}
 	console.log("reports", reports)
+	for (var i = 0; i < reports.length; i++) {
+		console.log("reports[i].created", reports[i].created)
+
+	}
 }
 
