@@ -17,10 +17,25 @@ window.addEventListener('load', function(event) {
 	getAllReports('/reports', showAllReports)
 })
 
+// helper function for displaying elements
+var appendReport = function(reportObj) {
+	var parentEl = document.createElement('div');
+	parentEl.innerHTML = reportObj.title;
+	document.body.appendChild(parentEl);
+
+}
+
 // store and display reports in the browser
 var showAllReports = function(responseTextJSON) {
 	var responsesArray = JSON.parse(responseTextJSON);
+	// store reports in global array
 	for (var i = 0; i < responsesArray.length; i++) {
 		reports.push(responsesArray[i]);
 	}
+	// display reports from global array
+	for (var i = 0; i < reports.length; i++) {
+		appendReport(reports[i]);
+	}
+	console.log("reports", reports)
 }
+
