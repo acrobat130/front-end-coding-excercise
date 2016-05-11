@@ -1,4 +1,5 @@
 var reports = [];
+var filteredReports = [];
 
 // fetch all resports from server, async
 var getAllReports = function(url, callback) {
@@ -35,7 +36,6 @@ var appendReport = function(reportObj) {
 	el.onclick = function() {
 		document.getElementById('reportTitle').innerHTML = reportObj.title;
 		document.getElementById('reportDetails').innerHTML = reportObj.body;
-
 	}
 	document.getElementById('reportList').appendChild(el);
 
@@ -52,6 +52,9 @@ var showAllReports = function(responseTextJSON) {
 	// sort reports in global array
 	sortReportsDescending(reports);
 
+	// store in filteredReports initially also
+	filteredReports = reports;
+
 	// display reports from global array
 	for (var i = 0; i < reports.length; i++) {
 		appendReport(reports[i]);
@@ -59,12 +62,38 @@ var showAllReports = function(responseTextJSON) {
 	console.log("reports", reports)
 	for (var i = 0; i < reports.length; i++) {
 		console.log("reports[i].created", reports[i].created)
-
 	}
 }
 
 ////////////////////////////////////////////////////////////
+var filterInput = document.getElementById('search');
 
+filterInput.onkeyup = function() {
+
+	var filterInputValue = filterInput.value.toLowerCase();
+	// empty filtered reports array
+	filteredReports = [];
+	// remove all reports from list
+	var reportDiv = document.getElementById('reportList')
+	while (reportDiv.firstChild) {
+		reportDiv.removeChild(reportDiv.firstChild);
+	}
+
+	for (var i = 0; i < reports.length; i++) {
+		var containedInTitle = reports[i].title.toLowerCase().includes(filterInputValue);
+		var containedInBody = reports[i].body.toLowerCase().includes(filterInputValue);
+
+		if (containedInTitle || containedInBody) {
+			filteredReports.push(reports[i]);
+		}
+	}
+
+	// display reports from filtered reports array
+	for (var i = 0; i < filteredReports.length; i++) {
+		appendReport(filteredReports[i]);
+	}
+	console.log("filteredReports", filteredReports)
+}
 
 
 
