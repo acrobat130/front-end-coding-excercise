@@ -81,9 +81,10 @@ filterInput.onkeyup = function() {
 
 	for (var i = 0; i < reports.length; i++) {
 		var containedInTitle = reports[i].title.toLowerCase().includes(filterInputValue);
-		var containedInBody = reports[i].body.toLowerCase().includes(filterInputValue);
+		// var containedInBody = reports[i].body.toLowerCase().includes(filterInputValue);
 
-		if (containedInTitle || containedInBody) {
+		// if (containedInTitle || containedInBody) {
+		if (containedInTitle) {
 			filteredReports.push(reports[i]);
 		}
 	}
