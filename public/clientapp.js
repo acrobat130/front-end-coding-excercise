@@ -1,6 +1,9 @@
 var reports = [];
 var filteredReports = [];
 
+// display reports on page load
+////////////////////////////////////////////////////////////
+
 // fetch all resports from server, async
 var getAllReports = function(url, callback) {
 	var request = new XMLHttpRequest();
@@ -18,6 +21,7 @@ window.addEventListener('load', function(event) {
 	getAllReports('/reports', showAllReports)
 })
 
+// helper functions for displaying reports on page load
 ////////////////////////////////////////////////////////////
 
 // helper function for sorting the reports
@@ -38,10 +42,9 @@ var appendReport = function(reportObj) {
 		document.getElementById('reportDetails').innerHTML = reportObj.body;
 	}
 	document.getElementById('reportList').appendChild(el);
-
 }
 
-// store, sort, and display reports in the browser
+// helper function to store, sort, and display reports in the browser
 var showAllReports = function(responseTextJSON) {
 	var responsesArray = JSON.parse(responseTextJSON);
 	// store reports in global array
@@ -65,6 +68,7 @@ var showAllReports = function(responseTextJSON) {
 	}
 }
 
+// filter functionality
 ////////////////////////////////////////////////////////////
 var filterInput = document.getElementById('search');
 
